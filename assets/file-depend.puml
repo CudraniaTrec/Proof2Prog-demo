@@ -1,0 +1,15 @@
+@startuml
+
+(params.h) as param
+(coq_proof.h) as proof
+(Types.h) as type
+(Terms.h) as term
+(algorithms.h) as algo
+(main.cpp) as main
+
+param --> term
+type --> term
+term --> algo
+algo --> main
+
+@enduml

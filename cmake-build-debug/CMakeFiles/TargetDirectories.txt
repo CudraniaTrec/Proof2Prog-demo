@@ -1,0 +1,3 @@
+/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles/proof2prog.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles/rebuild_cache.dir

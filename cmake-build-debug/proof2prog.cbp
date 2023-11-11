@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="proof2prog"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/cudrania/workspace/proof2prog/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="proof2prog">
+				<Option output="/home/cudrania/workspace/proof2prog/cmake-build-debug/proof2prog" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cudrania/workspace/proof2prog/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 proof2prog"/>
+					<CompileFile command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="proof2prog/fast">
+				<Option output="/home/cudrania/workspace/proof2prog/cmake-build-debug/proof2prog" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cudrania/workspace/proof2prog/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 proof2prog/fast"/>
+					<CompileFile command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/cudrania/workspace/proof2prog/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/cudrania/workspace/proof2prog/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/cudrania/workspace/proof2prog/Terms.h">
+			<Option target="proof2prog"/>
+		</Unit>
+		<Unit filename="/home/cudrania/workspace/proof2prog/Types.h">
+			<Option target="proof2prog"/>
+		</Unit>
+		<Unit filename="/home/cudrania/workspace/proof2prog/algorithm.h">
+			<Option target="proof2prog"/>
+		</Unit>
+		<Unit filename="/home/cudrania/workspace/proof2prog/coq_proof.h">
+			<Option target="proof2prog"/>
+		</Unit>
+		<Unit filename="/home/cudrania/workspace/proof2prog/main.cpp">
+			<Option target="proof2prog"/>
+		</Unit>
+		<Unit filename="/home/cudrania/workspace/proof2prog/param.h">
+			<Option target="proof2prog"/>
+		</Unit>
+		<Unit filename="/home/cudrania/workspace/proof2prog/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

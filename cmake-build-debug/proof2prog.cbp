@@ -61,6 +61,50 @@
 					<DistClean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="tests">
+				<Option output="/home/cudrania/workspace/proof2prog/cmake-build-debug/tests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cudrania/workspace/proof2prog/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 tests"/>
+					<CompileFile command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tests/fast">
+				<Option output="/home/cudrania/workspace/proof2prog/cmake-build-debug/tests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cudrania/workspace/proof2prog/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 tests/fast"/>
+					<CompileFile command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j32 -f &quot;/home/cudrania/workspace/proof2prog/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="edit_cache">
 				<Option working_dir="/home/cudrania/workspace/proof2prog/cmake-build-debug"/>
 				<Option type="4"/>
@@ -99,6 +143,9 @@
 		</Unit>
 		<Unit filename="/home/cudrania/workspace/proof2prog/param.h">
 			<Option target="proof2prog"/>
+		</Unit>
+		<Unit filename="/home/cudrania/workspace/proof2prog/tests.cpp">
+			<Option target="tests"/>
 		</Unit>
 		<Unit filename="/home/cudrania/workspace/proof2prog/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

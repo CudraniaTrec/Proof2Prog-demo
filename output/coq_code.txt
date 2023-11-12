@@ -1,0 +1,15 @@
+From PLF Require Import demo.
+Import demo.Demo2.
+Example test: well_typed (<{(\x:Nat, (\y:Nat, ( if ( x < y ) then y else x )))}>).
+Proof.
+eexists.
+eapply T_Abs. 
+eapply T_Abs. 
+eapply T_If. 
+- apply T_Lt. 
+  + apply T_Var. simpl_map. reflexivity. 
+  + apply T_Var. simpl_map. reflexivity. 
+- apply T_Var. simpl_map. reflexivity. 
+- apply T_Var. simpl_map. reflexivity. 
+Qed.
+

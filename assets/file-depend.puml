@@ -6,10 +6,13 @@
 (Terms.h) as term
 (algorithms.h) as algo
 (main.cpp) as main
+(tests.cpp) as test
 
 param --> term
 type --> term
 term --> algo
 algo --> main
+algo --> test
+proof --> term
 
 @enduml

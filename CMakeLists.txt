@@ -10,3 +10,5 @@ add_executable(proof2prog main.cpp
         param.h
         coq_proof.h
 )
+
+add_executable(tests tests.cpp)

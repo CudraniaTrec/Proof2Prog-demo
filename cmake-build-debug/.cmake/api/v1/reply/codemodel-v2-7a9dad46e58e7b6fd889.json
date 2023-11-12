@@ -15,7 +15,8 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -30,7 +31,8 @@
 					"name" : "proof2prog",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -41,6 +43,13 @@
 					"id" : "proof2prog::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-proof2prog-Debug-442edf35855c6f631a73.json",
 					"name" : "proof2prog",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "tests::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-tests-Debug-ae6d2d2bdce3d8d98418.json",
+					"name" : "tests",
 					"projectIndex" : 0
 				}
 			]

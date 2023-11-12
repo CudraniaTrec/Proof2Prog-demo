@@ -8,7 +8,8 @@
 #include <utility>
 #include "param.h"
 #include "Types.h"
-
+#include "coq_proof.h"
+//#include <fmt/core.h>
 
 typedef map<string, Ty *> Context;
 
@@ -60,6 +61,14 @@ public:
         return "UndefinedTerm";
     }
 
+    string coq_out() {
+        string term_code = out();
+        string coq_proof = generateProof()->out();
+        string res = "Example test: well_typed (<{";
+        res += term_code + "}>).\n" + coq_proof + "Qed.\n";
+        return res;
+    }
+
     virtual Ty *type(Context con) {
         return new ErrorType();
     }
@@ -91,8 +100,11 @@ public:
     }
 
     virtual void changeUnitNode(Tm *unit, Tm *tm) {}
-};
 
+    virtual CoqProof *generateProof() {
+        return new SingleProof("UndefinedProof");
+    }
+};
 
 class VarTerm : public Tm {
 public:
@@ -129,6 +141,10 @@ public:
     UnitNode *findUnitNode() override {
         return nullptr;
     }
+
+    CoqProof *generateProof() override {
+        return new SingleProof("apply T_Var. simpl_map. reflexivity. ");
+    }
 };
 
 class AppTerm : public Tm {
@@ -152,7 +168,7 @@ public:
 
         ArrowType *at = dynamic_cast<ArrowType *>( t1_type );
         if (at == nullptr) return new ErrorType();
-        if(t2_type->contains(at->domain)) return at->range;
+        if (t2_type->contains(at->domain)) return at->range;
         return new ErrorType();
     }
 
@@ -195,6 +211,15 @@ public:
         t1->changeUnitNode(unit, tm);
         t2->changeUnitNode(unit, tm);
     }
+
+    CoqProof *generateProof() override {
+        CoqProof *proof1 = t1->generateProof();
+        CoqProof *proof2 = t2->generateProof();
+
+        BranchProof *branch = new BranchProof(vector<CoqProof *>{proof1, proof2});
+        return new SeqProof(new SingleProof("eapply T_App. "), branch);
+    }
+
 };
 
 class LambdaTerm : public Tm {
@@ -207,7 +232,7 @@ public:
             : Tm(LambdaTm), x(std::move(x)), t(t), ty(ty) {}
 
     string out() override {
-        return "(lambda " + x + ":" + ty->out() + ". " + t->out()+")";// lambda x:nat. x
+        return "(\\" + x + ":" + ty->out() + ", " + t->out() + ")";// \x:nat, x
     }
 
     Ty *type(Context con) override {
@@ -250,6 +275,11 @@ public:
             return;
         }
         t->changeUnitNode(unit, tm);
+    }
+
+    CoqProof *generateProof() override {
+        CoqProof *proof = t->generateProof();
+        return new SeqProof(new SingleProof("eapply T_Abs. "), proof);
     }
 };
 
@@ -331,6 +361,15 @@ public:
         t2->changeUnitNode(unit, tm);
         t3->changeUnitNode(unit, tm);
     }
+
+    CoqProof *generateProof() override {
+        CoqProof *proof1 = t1->generateProof();
+        CoqProof *proof2 = t2->generateProof();
+        CoqProof *proof3 = t3->generateProof();
+
+        BranchProof *branch = new BranchProof(vector<CoqProof *>{proof1, proof2, proof3});
+        return new SeqProof(new SingleProof("eapply T_If. "), branch);
+    }
 };
 
 class NatTerm : public Tm {
@@ -364,6 +403,10 @@ public:
 
     UnitNode *findUnitNode() override {
         return nullptr;
+    }
+
+    CoqProof *generateProof() override {
+        return new SingleProof("apply T_Nat. ");
     }
 };
 
@@ -428,6 +471,14 @@ public:
         t1->changeUnitNode(unit, tm);
         t2->changeUnitNode(unit, tm);
     }
+
+    CoqProof *generateProof() override {
+        CoqProof *proof1 = t1->generateProof();
+        CoqProof *proof2 = t2->generateProof();
+
+        BranchProof *branch = new BranchProof(vector<CoqProof *>{proof1, proof2});
+        return new SeqProof(new SingleProof("apply T_Add. "), branch);
+    }
 };
 
 class MinusTerm : public Tm {
@@ -491,6 +542,14 @@ public:
         t1->changeUnitNode(unit, tm);
         t2->changeUnitNode(unit, tm);
     }
+
+    CoqProof *generateProof() override {
+        CoqProof *proof1 = t1->generateProof();
+        CoqProof *proof2 = t2->generateProof();
+
+        BranchProof *branch = new BranchProof(vector<CoqProof *>{proof1, proof2});
+        return new SeqProof(new SingleProof("apply T_Sub. "), branch);
+    }
 };
 
 class TrueTerm : public Tm {
@@ -523,6 +582,10 @@ public:
     UnitNode *findUnitNode() override {
         return nullptr;
     }
+
+    CoqProof *generateProof() override {
+        return new SingleProof("apply T_True. ");
+    }
 };
 
 class FalseTerm : public Tm {
@@ -550,6 +613,10 @@ public:
 
     int size() override {
         return 1;
+    }
+
+    CoqProof *generateProof() override {
+        return new SingleProof("apply T_False. ");
     }
 };
 
@@ -614,6 +681,14 @@ public:
         t1->changeUnitNode(unit, tm);
         t2->changeUnitNode(unit, tm);
     }
+
+    CoqProof *generateProof() override {
+        CoqProof *proof1 = t1->generateProof();
+        CoqProof *proof2 = t2->generateProof();
+
+        BranchProof *branch = new BranchProof(vector<CoqProof *>{proof1, proof2});
+        return new SeqProof(new SingleProof("apply T_And. "), branch);
+    }
 };
 
 class OrTerm : public Tm {
@@ -677,6 +752,14 @@ public:
         t1->changeUnitNode(unit, tm);
         t2->changeUnitNode(unit, tm);
     }
+
+    CoqProof *generateProof() override {
+        CoqProof *proof1 = t1->generateProof();
+        CoqProof *proof2 = t2->generateProof();
+
+        BranchProof *branch = new BranchProof(vector<CoqProof *>{proof1, proof2});
+        return new SeqProof(new SingleProof("apply T_Or. "), branch);
+    }
 };
 
 class NotTerm : public Tm {
@@ -723,6 +806,11 @@ public:
             return;
         }
         t->changeUnitNode(unit, tm);
+    }
+
+    CoqProof *generateProof() override {
+        CoqProof *proof = t->generateProof();
+        return new SeqProof(new SingleProof("apply T_Not. "), proof);
     }
 };
 
@@ -786,6 +874,14 @@ public:
         t1->changeUnitNode(unit, tm);
         t2->changeUnitNode(unit, tm);
     }
+
+    CoqProof *generateProof() override {
+        CoqProof *proof1 = t1->generateProof();
+        CoqProof *proof2 = t2->generateProof();
+
+        BranchProof *branch = new BranchProof(vector<CoqProof *>{proof1, proof2});
+        return new SeqProof(new SingleProof("apply T_Lt. "), branch);
+    }
 };
 
 class EqualTerm : public Tm {
@@ -797,7 +893,7 @@ public:
             : Tm(EqualTm), t1(t1), t2(t2) {}
 
     string out() override {
-        return "( " + t1->out() + " = " + t2->out() + " )";
+        return "( " + t1->out() + " == " + t2->out() + " )";
     }
 
     Ty *type(Context con) override {
@@ -848,6 +944,14 @@ public:
         t1->changeUnitNode(unit, tm);
         t2->changeUnitNode(unit, tm);
     }
+
+    CoqProof *generateProof() override {
+        CoqProof *proof1 = t1->generateProof();
+        CoqProof *proof2 = t2->generateProof();
+
+        BranchProof *branch = new BranchProof(vector<CoqProof *>{proof1, proof2});
+        return new SeqProof(new SingleProof("apply T_Eq. "), branch);
+    }
 };
 
 class UnitTerm : public Tm {
@@ -880,6 +984,10 @@ public:
     UnitNode *findUnitNode() override {
         return new UnitNode(this, 0, new Context());
     }
+
+    CoqProof *generateProof() override {
+        return new SingleProof("admit. ");
+    }
 };
 
 class ErrorTerm : public Tm {
@@ -911,6 +1019,10 @@ public:
 
     UnitNode *findUnitNode() override {
         return nullptr;
+    }
+
+    CoqProof *generateProof() override {
+        return new SingleProof("Admitted. ");
     }
 };
 

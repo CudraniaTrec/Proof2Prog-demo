@@ -7,11 +7,10 @@
 
 #include"Terms.h"
 #include<queue>
-#include<vector>
 #include<list>
-#include<map>
 #include<cmath>
 
+//Definition of beam
 struct BeamItem {
     Tm *tm;
     double prob;
@@ -54,7 +53,7 @@ struct Beam {
         if (item->prob <= beamList.front()->prob) {
             return 0;
         }
-        BeamItem* del = beamList.front();
+        BeamItem *del = beamList.front();
         beamList.pop_front();
         delete del;
         add(item);
@@ -71,6 +70,7 @@ struct Beam {
             }
             index--;
         }
+        return nullptr;
     }
 
     BeamItem *getBest() {
@@ -93,6 +93,7 @@ struct Beam {
     }
 };
 
+//Algorithm to do beam search
 string generateNewVar(Context *con) {
     for (auto &it: alphabet) {
         if (con->find(it) == con->end()) {
@@ -213,6 +214,151 @@ Tm *beam_search_wrap(Tm *target, bool type_check) {
     }
     cout << "Fail to find a solution in range" << endl;
     return nullptr;
+}
+
+//Generate random programs to search
+double genRan() {
+    return (rand() % 1000009) / (double) 1000009;
+}
+
+string generateRandomVar(Context *con) {
+    int index = rand() % con->size();
+    for (auto &it: *con) {
+        if (index == 0) {
+            return it.first;
+        }
+        index--;
+    }
+    return "err";
+}
+
+Tm *generateRandomProg(int size, Context con) {
+    vector<Tm *> possibleRets = vector<Tm *>();
+    vector<double> possibility = vector<double>();
+    if (size <= 0) {
+        return new ErrorTerm();
+    }
+    if (size == 1) {
+        double prob = prob_size_1();
+        double ran = genRan();
+        if (ran < var_prob / prob && !con.empty()) {
+            return new VarTerm(generateRandomVar(&con));
+        } else if (ran < (var_prob + nat_prob) / prob) {
+            return new NatTerm(rand() % 2);
+        } else if (ran < (var_prob + nat_prob + true_prob) / prob) {
+            return new TrueTerm();
+        } else {
+            return new FalseTerm();
+        }
+    }
+
+    if (size >= 2) {
+        string var = generateNewVar(&con);
+
+        Context con1 = con;
+        con1.insert_or_assign(var, new NatType());
+        possibleRets.push_back(new LambdaTerm(var, new NatType(), generateRandomProg(size - 1, con1)));
+        possibility.push_back(0.5 * lambda_prob);
+
+        Context con2 = con;
+        con2.insert_or_assign(var, new BoolType());
+        possibleRets.push_back(new LambdaTerm(var, new BoolType(), generateRandomProg(size - 1, con2)));
+        possibility.push_back(0.2 * lambda_prob);
+
+        Context con3 = con;
+        con3.insert_or_assign(var, new ArrowType(new NatType(), new NatType()));
+        possibleRets.push_back(new LambdaTerm(var, new ArrowType(new NatType(), new NatType()),
+                                              generateRandomProg(size - 1, con3)));
+        possibility.push_back(0.1 * lambda_prob);
+
+        Context con4 = con;
+        con4.insert_or_assign(var, new ArrowType(new BoolType(), new BoolType()));
+        possibleRets.push_back(new LambdaTerm(var, new ArrowType(new BoolType(), new BoolType()),
+                                              generateRandomProg(size - 1, con4)));
+        possibility.push_back(0.1 * lambda_prob);
+
+        Context con5 = con;
+        con5.insert_or_assign(var, new ArrowType(new NatType(), new BoolType()));
+        possibleRets.push_back(new LambdaTerm(var, new ArrowType(new NatType(), new BoolType()),
+                                              generateRandomProg(size - 1, con5)));
+        possibility.push_back(0.1 * lambda_prob);
+
+        possibleRets.push_back(new NotTerm(generateRandomProg(size - 1, con)));
+        possibility.push_back(not_prob);
+    }
+
+    if (size >= 3) {
+        for (int i = 1; i <= size - 2; i++) {
+            possibleRets.push_back(new AppTerm(generateRandomProg(i, con), generateRandomProg(size - i - 1, con)));
+            possibility.push_back(app_prob / (size - 2));
+
+            possibleRets.push_back(new PlusTerm(generateRandomProg(i, con), generateRandomProg(size - i - 1, con)));
+            possibility.push_back(plus_prob / (size - 2));
+
+            possibleRets.push_back(new MinusTerm(generateRandomProg(i, con), generateRandomProg(size - i - 1, con)));
+            possibility.push_back(minus_prob / (size - 2));
+
+            possibleRets.push_back(new AndTerm(generateRandomProg(i, con), generateRandomProg(size - i - 1, con)));
+            possibility.push_back(and_prob / (size - 2));
+
+            possibleRets.push_back(new OrTerm(generateRandomProg(i, con), generateRandomProg(size - i - 1, con)));
+            possibility.push_back(or_prob / (size - 2));
+
+            possibleRets.push_back(new LessTerm(generateRandomProg(i, con), generateRandomProg(size - i - 1, con)));
+            possibility.push_back(less_prob / (size - 2));
+
+            possibleRets.push_back(new EqualTerm(generateRandomProg(i, con), generateRandomProg(size - i - 1, con)));
+            possibility.push_back(equal_prob / (size - 2));
+        }
+    }
+
+    if (size >= 4) {
+        double if_prob3 = 0.2 * (if_prob / (size - 3));
+        for (int i = 1; i <= size - 3; i++) {
+            possibleRets.push_back(new IfTerm(generateRandomProg(1, con), generateRandomProg(i, con),
+                                              generateRandomProg(size - i - 2, con)));
+            possibility.push_back(if_prob3);
+        }
+    }
+
+    if (size >= 5) {
+        double if_prob3 = 0.2 * (if_prob / (size - 4));
+        for (int i = 1; i <= size - 4; i++) {
+            possibleRets.push_back(new IfTerm(generateRandomProg(2, con), generateRandomProg(i, con),
+                                              generateRandomProg(size - i - 3, con)));
+            possibility.push_back(if_prob3);
+        }
+    }
+
+    if (size >= 6) {
+        double if_prob3 = 0.6 * (if_prob / (size - 5));
+        for (int i = 1; i <= size - 5; i++) {
+            possibleRets.push_back(new IfTerm(generateRandomProg(3, con), generateRandomProg(i, con),
+                                              generateRandomProg(size - i - 4, con)));
+            possibility.push_back(if_prob3);
+        }
+    }
+
+    double sum_prob = 0;
+    for (auto &it: possibility) {
+        sum_prob += it;
+    }
+
+    double ran = genRan();
+    int ret = 0;
+    for (int i = 0; i < possibility.size(); i++) {
+        if (ran < possibility[i] / sum_prob) {
+            ret = i;
+            break;
+        }
+        ran -= possibility[i] / sum_prob;
+    }
+    //free
+    for (auto &it: possibleRets) {
+        if (it != possibleRets[ret])
+            delete (it);
+    }
+    return possibleRets[ret];
 }
 
 #endif //PROOF2PROG_ALGORITHM_H

@@ -145,7 +145,7 @@ bool test_coq_accept_proof(string proof, bool verbose = false) {
     string coq_work_folder = "/home/cudrania/coq/coq_client/coq-lsp-pyclient/coq_proj/";
     string coq_work_file = "/home/cudrania/coq/coq_client/coq-lsp-pyclient/coq_proj/search.v";
     string coq_work_file2 = "output/coq_code.txt";
-    
+
     //write coq_code to coq_work_file
     ofstream fout(coq_work_file.c_str());
     if (!fout.is_open()) {  //print error message and exit

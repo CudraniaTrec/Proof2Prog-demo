@@ -92,6 +92,7 @@ proof2prog_EXTERNAL_OBJECTS =
 
 proof2prog: CMakeFiles/proof2prog.dir/main.cpp.o
 proof2prog: CMakeFiles/proof2prog.dir/build.make
+proof2prog: fmt/libfmtd.a
 proof2prog: CMakeFiles/proof2prog.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable proof2prog"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/proof2prog.dir/link.txt --verbose=$(VERBOSE)

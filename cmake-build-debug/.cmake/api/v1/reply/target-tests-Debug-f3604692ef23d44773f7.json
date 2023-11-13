@@ -10,7 +10,8 @@
 	{
 		"commands" : 
 		[
-			"add_executable"
+			"add_executable",
+			"target_link_libraries"
 		],
 		"files" : 
 		[
@@ -24,7 +25,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 14,
+				"line" : 16,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 19,
 				"parent" : 0
 			}
 		]
@@ -41,12 +48,19 @@
 					"fragment" : "-std=gnu++20"
 				}
 			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "/home/cudrania/workspace/proof2prog/fmt/include"
+				}
+			],
 			"language" : "CXX",
 			"languageStandard" : 
 			{
 				"backtraces" : 
 				[
-					1
+					2
 				],
 				"standard" : "20"
 			},
@@ -54,6 +68,13 @@
 			[
 				0
 			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "fmt::@b8b4cdcf357fa61d5575"
 		}
 	],
 	"id" : "tests::@6890427a1f51a3e7e1df",
@@ -68,6 +89,11 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "fmt/libfmtd.a",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"

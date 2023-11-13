@@ -2,3 +2,14 @@
 /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles/tests.dir
 /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles/list_install_components.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles/install.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles/install/local.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles/install/strip.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/fmt/CMakeFiles/fmt.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/fmt/CMakeFiles/edit_cache.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/fmt/CMakeFiles/rebuild_cache.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/fmt/CMakeFiles/list_install_components.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/fmt/CMakeFiles/install.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/fmt/CMakeFiles/install/local.dir
+/home/cudrania/workspace/proof2prog/cmake-build-debug/fmt/CMakeFiles/install/strip.dir

@@ -19,7 +19,7 @@ double var_prob = 10;
 double if_prob = 1;
 double nat_prob = 10;
 double plus_prob = 0.5;
-double minus_prob = 0.5;
+double minus_prob = 0;
 double true_prob = 0.5;
 double false_prob = 0.5;
 double and_prob = 0.5;
@@ -27,6 +27,7 @@ double or_prob = 0.5;
 double not_prob = 0.5;
 double less_prob = 3;
 double equal_prob = 3;
+double unit_prob = 1;
 
 double prob_all() {
     return app_prob + lambda_prob + var_prob + if_prob + nat_prob + plus_prob +

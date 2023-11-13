@@ -125,71 +125,74 @@ void test_generate_coq_proof_random() {
 string exec_get_result(string cmd) {
     char buffer[128];
     string result = "";
+    cmd = fmt::format("{} 2>&1", cmd);
     FILE *pipe = popen(cmd.c_str(), "r");
     if (!pipe) {
         cout << "popen failed!" << endl;
         return "";
     }
     while (!feof(pipe)) {
-        if (fgets(buffer, 128, pipe) != NULL)
+        if (fgets(buffer, 128, pipe) != NULL) {
             result += buffer;
+        }
     }
     pclose(pipe);
     return result;
 }
 
 //test whether coq accept the proof
-void test_coq_accept_proof(string proof) {
+bool test_coq_accept_proof(string proof, bool verbose = false) {
     string coq_work_folder = "/home/cudrania/coq/coq_client/coq-lsp-pyclient/coq_proj/";
     string coq_work_file = "/home/cudrania/coq/coq_client/coq-lsp-pyclient/coq_proj/search.v";
-    string coq_work_file2 ="output/coq_code.txt";
+    string coq_work_file2 = "output/coq_code.txt";
+    
     //write coq_code to coq_work_file
     ofstream fout(coq_work_file.c_str());
-    if(!fout.is_open()){  //print error message and exit
-        cerr<<"Can't open output file"<<endl;
-        return;
+    if (!fout.is_open()) {  //print error message and exit
+        cerr << "Can't open output file" << endl;
+        return false;
     }
 
-    string coq_code="From PLF Require Import demo.\nImport demo.Demo2.\n";
-    coq_code+=proof;
+    string coq_code = "From PLF Require Import demo.\nImport demo.Demo2.\n";
+    coq_code += proof;
     fout << coq_code << endl;
     fout.close();
 
-    string cmd="cd ";
-    cmd+=coq_work_folder;
-    cmd+=" && coqc -Q . PLF search.v";
-    string res=exec_get_result(cmd);
-    if(res==""){
-        cout<<"coq accept the proof!"<<endl;
-        return;
-    }else {
-        cout<<"coq reject the proof!"<<endl;
-        cout<<res<<endl;
-        return;
+    string cmd = fmt::format("cd {} && /home/cudrania/.opam/default/bin/coqc -Q . PLF search.v", coq_work_folder);
+    string res = exec_get_result(cmd);
+    if (res == "") {
+        return true;
+    } else {
+        if (verbose) {
+            cout << res << endl;
+        }
+        return false;
     }
 }
 
 //test the ability between coq and type check
-void test_coq_VS_typecheck() {
-    int ranSize = 7;
-    Tm *tm = nullptr;
-    Context con = Context();
-    int fails = 0;
-    do {
-        fails++;
-        if (tm != nullptr)
-            delete (tm);
-        if (fails % 20 == 0) {
-            ranSize--;
+void test_coq_VS_typecheck(int size = 10) {
+    int coq_accept_time = 0, typeCheck_accept_time = 0;
+    for (int i = 0; i < size; i++) {
+        Tm *tm = generateRandomProg(5, Context(), true);
+        string proof = tm->coq_out();
+        if (test_coq_accept_proof(proof)) {
+            coq_accept_time++;
+            if (tm->type(Context())->equals(new ErrorType())) {
+                cout << "coq accept but type check reject! : " << endl;
+                cout << tm->out() << endl << endl;
+            } else {
+                typeCheck_accept_time++;
+            }
         }
-        tm = generateRandomProg(ranSize, Context());
-    } while (tm->type(con)->equals(new ErrorType()));
-    cout << tm->coq_out();
-    string proof = tm->coq_out();
-    test_coq_accept_proof(proof);
+    }
+    cout << "coq accept time: " << coq_accept_time << endl;
+    cout << "type check accept time: " << typeCheck_accept_time << endl;
+    cout << "coq accept rate: " << (double) typeCheck_accept_time / coq_accept_time << endl;
 }
 
 int main() {
     srand(time(0));
-    test_coq_VS_typecheck();
+    test_coq_VS_typecheck(100);
+//    cout << exec_get_result("\"/home/cudrania/.opam/default/bin/coqc --version\"");
 }

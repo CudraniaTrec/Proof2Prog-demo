@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/home/cudrania/workspace/proof2prog/fmt/include
 
 CXX_FLAGS = -g -std=gnu++20
 

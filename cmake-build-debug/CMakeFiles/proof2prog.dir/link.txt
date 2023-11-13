@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/proof2prog.dir/main.cpp.o -o proof2prog 
+/usr/bin/c++ -g CMakeFiles/proof2prog.dir/main.cpp.o -o proof2prog  fmt/libfmtd.a 

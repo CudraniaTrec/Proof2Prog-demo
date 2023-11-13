@@ -6,6 +6,11 @@
 			[
 				{
 					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
@@ -15,8 +20,24 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0,
-						1
+						1,
+						2
+					]
+				},
+				{
+					"build" : "fmt",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-fmt-Debug-b222ca991ee84916f012.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "fmt",
+					"targetIndexes" : 
+					[
+						0
 					]
 				}
 			],
@@ -24,6 +45,10 @@
 			"projects" : 
 			[
 				{
+					"childIndexes" : 
+					[
+						1
+					],
 					"directoryIndexes" : 
 					[
 						0
@@ -31,24 +56,43 @@
 					"name" : "proof2prog",
 					"targetIndexes" : 
 					[
-						0,
+						1,
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
 						1
+					],
+					"name" : "FMT",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0
 					]
 				}
 			],
 			"targets" : 
 			[
 				{
+					"directoryIndex" : 1,
+					"id" : "fmt::@b8b4cdcf357fa61d5575",
+					"jsonFile" : "target-fmt-Debug-4b346d1c9be7c5fa9c8a.json",
+					"name" : "fmt",
+					"projectIndex" : 1
+				},
+				{
 					"directoryIndex" : 0,
 					"id" : "proof2prog::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-proof2prog-Debug-442edf35855c6f631a73.json",
+					"jsonFile" : "target-proof2prog-Debug-1125a8e2450a214d6d73.json",
 					"name" : "proof2prog",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "tests::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-tests-Debug-ae6d2d2bdce3d8d98418.json",
+					"jsonFile" : "target-tests-Debug-f3604692ef23d44773f7.json",
 					"name" : "tests",
 					"projectIndex" : 0
 				}

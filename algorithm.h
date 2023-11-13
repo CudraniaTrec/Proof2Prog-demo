@@ -232,7 +232,7 @@ string generateRandomVar(Context *con) {
     return "err";
 }
 
-Tm *generateRandomProg(int size, Context con) {
+Tm *generateRandomProg(int size, Context con, bool allow_unit = false) {
     vector<Tm *> possibleRets = vector<Tm *>();
     vector<double> possibility = vector<double>();
     if (size <= 0) {
@@ -240,6 +240,9 @@ Tm *generateRandomProg(int size, Context con) {
     }
     if (size == 1) {
         double prob = prob_size_1();
+        if (allow_unit) {
+            prob += unit_prob;
+        }
         double ran = genRan();
         if (ran < var_prob / prob && !con.empty()) {
             return new VarTerm(generateRandomVar(&con));
@@ -247,6 +250,10 @@ Tm *generateRandomProg(int size, Context con) {
             return new NatTerm(rand() % 2);
         } else if (ran < (var_prob + nat_prob + true_prob) / prob) {
             return new TrueTerm();
+        } else if (ran < (var_prob + nat_prob + true_prob + false_prob) / prob) {
+            return new FalseTerm();
+        } else if (allow_unit) {
+            return new UnitTerm();
         } else {
             return new FalseTerm();
         }
@@ -359,6 +366,22 @@ Tm *generateRandomProg(int size, Context con) {
             delete (it);
     }
     return possibleRets[ret];
+}
+
+Tm* generateRandomCorrectProg(int size=7) {
+    Tm *tm = nullptr;
+    Context con = Context();
+    int fails = 0;
+    do {
+        fails++;
+        if (tm != nullptr)
+            delete (tm);
+        if (fails % 20 == 0) {
+            size--;
+        }
+        tm = generateRandomProg(size, Context());
+    } while (tm->type(con)->equals(new ErrorType()));
+    return tm;
 }
 
 #endif //PROOF2PROG_ALGORITHM_H

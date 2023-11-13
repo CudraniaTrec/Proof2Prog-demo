@@ -9,7 +9,7 @@
 #include "param.h"
 #include "Types.h"
 #include "coq_proof.h"
-//#include <fmt/core.h>
+#include "fmt/core.h"
 
 typedef map<string, Ty *> Context;
 

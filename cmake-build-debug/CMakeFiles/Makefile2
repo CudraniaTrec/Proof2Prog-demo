@@ -65,30 +65,47 @@ CMAKE_BINARY_DIR = /home/cudrania/workspace/proof2prog/cmake-build-debug
 # The main recursive "all" target.
 all: CMakeFiles/proof2prog.dir/all
 all: CMakeFiles/tests.dir/all
+all: fmt/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: fmt/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/proof2prog.dir/clean
 clean: CMakeFiles/tests.dir/clean
+clean: fmt/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory fmt
+
+# Recursive "all" directory target.
+fmt/all: fmt/CMakeFiles/fmt.dir/all
+.PHONY : fmt/all
+
+# Recursive "preinstall" directory target.
+fmt/preinstall:
+.PHONY : fmt/preinstall
+
+# Recursive "clean" directory target.
+fmt/clean: fmt/CMakeFiles/fmt.dir/clean
+.PHONY : fmt/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/proof2prog.dir
 
 # All Build rule for target.
-CMakeFiles/proof2prog.dir/all:
+CMakeFiles/proof2prog.dir/all: fmt/CMakeFiles/fmt.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/proof2prog.dir/build.make CMakeFiles/proof2prog.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/proof2prog.dir/build.make CMakeFiles/proof2prog.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target proof2prog"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles --progress-num=4,5 "Built target proof2prog"
 .PHONY : CMakeFiles/proof2prog.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/proof2prog.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/proof2prog.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/proof2prog.dir/rule
@@ -106,15 +123,15 @@ CMakeFiles/proof2prog.dir/clean:
 # Target rules for target CMakeFiles/tests.dir
 
 # All Build rule for target.
-CMakeFiles/tests.dir/all:
+CMakeFiles/tests.dir/all: fmt/CMakeFiles/fmt.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles --progress-num=3,4 "Built target tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles --progress-num=6,7 "Built target tests"
 .PHONY : CMakeFiles/tests.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/tests.dir/rule
@@ -127,6 +144,32 @@ tests: CMakeFiles/tests.dir/rule
 CMakeFiles/tests.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/clean
 .PHONY : CMakeFiles/tests.dir/clean
+
+#=============================================================================
+# Target rules for target fmt/CMakeFiles/fmt.dir
+
+# All Build rule for target.
+fmt/CMakeFiles/fmt.dir/all:
+	$(MAKE) $(MAKESILENT) -f fmt/CMakeFiles/fmt.dir/build.make fmt/CMakeFiles/fmt.dir/depend
+	$(MAKE) $(MAKESILENT) -f fmt/CMakeFiles/fmt.dir/build.make fmt/CMakeFiles/fmt.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target fmt"
+.PHONY : fmt/CMakeFiles/fmt.dir/all
+
+# Build rule for subdir invocation for target.
+fmt/CMakeFiles/fmt.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 fmt/CMakeFiles/fmt.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cudrania/workspace/proof2prog/cmake-build-debug/CMakeFiles 0
+.PHONY : fmt/CMakeFiles/fmt.dir/rule
+
+# Convenience name for target.
+fmt: fmt/CMakeFiles/fmt.dir/rule
+.PHONY : fmt
+
+# clean rule for target.
+fmt/CMakeFiles/fmt.dir/clean:
+	$(MAKE) $(MAKESILENT) -f fmt/CMakeFiles/fmt.dir/build.make fmt/CMakeFiles/fmt.dir/clean
+.PHONY : fmt/CMakeFiles/fmt.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

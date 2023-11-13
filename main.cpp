@@ -51,6 +51,9 @@ void testAll(int size) {
     }
 
     ofstream fout("output/log.txt");
+    if(!fout.is_open()){  //print error message and exit
+        cerr<<"Can't open output file"<<endl;
+    }
     fout << successWithType << " " << failWithType << " " << endl <<
          successWithoutType << " " << failWithoutType << endl;
     fout << setiosflags(ios::fixed) << setprecision(2);
@@ -67,6 +70,7 @@ void testAll(int size) {
 
 int main() {
     srand(time(0));
+    system("ls -l");
     testAll(1);
     return 0;
 }
